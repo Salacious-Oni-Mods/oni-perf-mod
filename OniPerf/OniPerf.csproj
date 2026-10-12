@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>OniPerf</RootNamespace>
+    <AssemblyName>OniPerf</AssemblyName>
+    <Version>0.3.0</Version>
+    <!-- On here (Directory.Build.props turns it off) so <Version> reaches the assembly, where the
+         load line reads it. Keep mod_info.yaml's version the same. -->
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="*.cs" />
+    <Compile Include="Levers\*.cs" />
+    <Compile Include="Load\*.cs" />
+    <Compile Include="Load\Fast\*.cs" />
+    <!-- config.json is read with the Newtonsoft the game already ships in Managed. Reference only:
+         the mod adds no assembly to the install. -->
+    <Reference Include="Newtonsoft.Json"><HintPath>$(ModLibDir)Newtonsoft.Json.dll</HintPath><Private>false</Private></Reference>
+    <!-- UnityEngine.Input: the cursor-position checks in HoverCache, IdleCams and RaycastCache. -->
+    <Reference Include="UnityEngine.InputLegacyModule"><HintPath>$(ModLibDir)UnityEngine.InputLegacyModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.TextRenderingModule"><HintPath>$(ModLibDir)UnityEngine.TextRenderingModule.dll</HintPath><Private>false</Private></Reference>
+    <None Include="mod.yaml" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="mod_info.yaml" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

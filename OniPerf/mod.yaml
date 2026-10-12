@@ -1,0 +1,3 @@
+title: "ONI Perf"
+description: "Frame-rate levers: skips per-frame work whose result nothing reads. No gameplay change with the defaults. Each lever can be switched in config.json beside OniPerf.dll."
+staticID: "OniPerf"

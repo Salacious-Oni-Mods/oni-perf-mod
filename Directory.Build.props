@@ -1,0 +1,40 @@
+<Project>
+
+  <!-- Shared build settings. The game's assemblies are referenced, never included: put a copy of
+       OxygenNotIncluded_Data/Managed in lib/ beside this file, or set ONI_LIB to that folder. -->
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <DebugType>none</DebugType>
+    <Deterministic>true</Deterministic>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <NoWarn>$(NoWarn);CS1701;CS1702;MSB3277</NoWarn>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <ModLibDir Condition="'$(ONI_LIB)' != ''">$(ONI_LIB)/</ModLibDir>
+    <ModLibDir Condition="'$(ONI_LIB)' == ''">$(MSBuildThisFileDirectory)lib\</ModLibDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="0Harmony"><HintPath>$(ModLibDir)0Harmony.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Assembly-CSharp"><HintPath>$(ModLibDir)Assembly-CSharp.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Assembly-CSharp-firstpass"><HintPath>$(ModLibDir)Assembly-CSharp-firstpass.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine"><HintPath>$(ModLibDir)UnityEngine.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.CoreModule"><HintPath>$(ModLibDir)UnityEngine.CoreModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.UI"><HintPath>$(ModLibDir)UnityEngine.UI.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.UIModule"><HintPath>$(ModLibDir)UnityEngine.UIModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Unity.TextMeshPro"><HintPath>$(ModLibDir)Unity.TextMeshPro.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+
+  <Target Name="VerifyGameAssemblies" BeforeTargets="ResolveAssemblyReferences">
+    <Error Condition="!Exists('$(ModLibDir)Assembly-CSharp.dll')"
+           Text="The game's assemblies are missing from $(ModLibDir). Copy OxygenNotIncluded_Data/Managed to lib/ beside Directory.Build.props, or set ONI_LIB to that folder." />
+  </Target>
+
+</Project>

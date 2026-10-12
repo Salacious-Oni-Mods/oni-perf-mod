@@ -1,0 +1,23 @@
+NOTICE
+
+OniPerf is released under the MIT licence (LICENSE), with the exception below.
+
+Files adapted from the game's own code
+--------------------------------------
+
+Three files of the optional fast loader (the `fastLoad` setting, off by default) follow the
+structure of Oxygen Not Included's own save-loading code closely, method for method, so that a
+load spread over many frames does exactly what the game's single load call does, in the same
+order:
+
+    OniPerf/Load/Fast/AsyncLoad.cs          the game's SaveLoader and SaveManager load path
+    OniPerf/Load/Fast/FastLoadInternal.cs   the game's SaveLoadRoot.LoadInternal
+    OniPerf/Load/Fast/FastDeser.cs          the game's KSerialization field deserializer
+
+Those three files are NOT covered by the MIT licence. The parts of them that follow the game's
+code remain the property of Klei Entertainment, the game's developer, and are included only so
+that the mod can work with the game. They are to be replaced by independently written code in a
+later release. Every other file in this repository is original work under the MIT licence.
+
+Oxygen Not Included is a trademark of Klei Entertainment. This mod is not made or endorsed by
+Klei Entertainment.
